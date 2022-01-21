@@ -5,17 +5,26 @@ from app.api.api import router as api_router
 from mangum import Mangum
 
 description="""
-FAST API DEMO
+FastAPI- DynamoDB CRUD Operations
 
 ## Features
-1.
-2.
+This project on FAST API contains 4 endpoints to perform CRUD operations on DynamoDB.
+__________________________________________
+    Name of DynamoDB Table= Employee
+    Table consists of following fields:
+            emp_id: str
 
-## Additional Links
-1.
-2.
-3.
-4.
+            department: str
+
+            emp_name: str
+
+            designation: str
+
+            emp_email: str
+
+            emp_contact: str
+__________________________________________
+
 """
 
 app = FastAPI(title="Fast API Demo", description= description)

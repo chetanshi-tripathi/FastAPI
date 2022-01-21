@@ -35,7 +35,7 @@ def get_employee_by_id(emp_id: str):
         )
 
     
-@router.get("/")
+@router.get("/get")
 async def get_employee(emp_id: str):
     response=get_employee_by_id(emp_id)
     return response
@@ -43,7 +43,7 @@ async def get_employee(emp_id: str):
     
 
 
-@router.post("")
+@router.post("/add")
 async def add_employee(req_body: Employee):
     req_body_dict= req_body.dict()
     table.put_item(
@@ -59,7 +59,7 @@ async def add_employee(req_body: Employee):
     response= get_employee_by_id(req_body_dict['emp_id'])
     return response
 
-@router.delete("")
+@router.delete("/delete")
 async def delete_employee(emp_id: str):
     try:
         table.delete_item(
@@ -75,7 +75,7 @@ async def delete_employee(emp_id: str):
 
 
 
-@router.put("")
+@router.put("/update")
 async def update_employee(emp_id, department, emp_name, emp_email, emp_contact):
     table.update_item(
     Key={
