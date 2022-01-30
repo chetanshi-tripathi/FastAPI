@@ -3,7 +3,7 @@ from typing import Optional, Any
 from fastapi import FastAPI
 from app.api.api import router as api_router
 from mangum import Mangum
-
+from starlette.middleware.cors import CORSMiddleware
 description="""
 FastAPI- DynamoDB CRUD Operations
 
@@ -12,24 +12,29 @@ This project on FAST API contains 4 endpoints to perform CRUD operations on Dyna
 __________________________________________
     Name of DynamoDB Table= Employee
     Table consists of following fields:
+
             emp_id: str
-
             department: str
-
             emp_name: str
-
             designation: str
-
             emp_email: str
-
             emp_contact: str
 __________________________________________
 
 """
 
 app = FastAPI(title="Fast API Demo", description= description)
+origins=[
+    "*"
+    ]
 
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins= origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 @app.get("/")
 async def root():
@@ -37,4 +42,4 @@ async def root():
 
 
 app.include_router(api_router, prefix="/api")
-handler= Mangum(app)
+handler=Mangum(app)
